@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package library;
+
+service LibraryService {
+    rpc AddBook (Book) returns (BookResponse);
+    rpc CreateUsers (stream User) returns (UserResponse);
+    rpc UpdateBook (Book) returns (BookResponse);
+    rpc RemoveBook (Book) returns (BooksResponse);
+    rpc ListAvailableBooks (Empty) returns (BookList);
+    rpc LocateBook (LocateRequest) returns (LocateResponse);
+    rpc BorrowBook (BorrowRequest) returns (BorrowResponse);
+}
+
+message Book {
+    string title = 1;
+    string author_1 = 2;
+    string author_2 = 3;
+    string location = 4;
+    string isbn = 5;
+    bool status = 6;
+}
+
+message User {
+    string user_id = 1;
+    string profile = 2;
+}
+
+message Empty {}
+
+message BookResponse {
+    string isbn = 1;
+}
+
+message BooksResponse {
+    repeated Book books = 1;
+}
+
+message BookList {
+    repeated Book books = 1;
+}
+
+message LocateRequest {
+    string isbn = 1;
+}
+
+message LocateResponse {
+    string location = 1;
+}
+
+message BorrowRequest {
+    string user_id = 1;
+    string isbn = 2;
+}
+
+message BorrowResponse {
+    bool success = 1;
+}

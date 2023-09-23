@@ -1,0 +1,127 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Faculty Lecturer API
+  description: API for managing faculty lecturers.
+
+paths:
+  /lecturers:
+    get:
+      summary: Retrieve a list of all lecturers
+      operationId: getAllLecturers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lecturer'
+
+    post:
+      summary: Add a new lecturer
+      operationId: addLecturer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Lecturer'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+
+  /lecturers/{staffNumber}:
+    get:
+      summary: Retrieve the details of a specific lecturer
+      operationId: getLecturerByStaffNumber
+      parameters:
+        - name: staffNumber
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lecturer'
+        '404':
+          description: Not Found
+
+    put:
+      summary: Update an existing lecturer's information
+      operationId: updateLecturerByStaffNumber
+      parameters:
+        - name: staffNumber
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Lecturer'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+
+    delete:
+      summary: Delete a lecturer's record
+      operationId: deleteLecturerByStaffNumber
+      parameters:
+        - name: staffNumber
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+
+  /lecturers/course/{courseCode}:
+    get:
+      summary: Retrieve all the lecturers that teach a certain course
+      operationId: getLecturersByCourseCode
+      parameters:
+        - name: courseCode
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lecturer'
+
+  /lecturers/office/{officeNumber}:
+    get:
+      summary: Retrieve all the lecturers that sit in the same office
+      operationId: getLecturersByOfficeNumber
+      parameters:
+        - name: officeNumber
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
