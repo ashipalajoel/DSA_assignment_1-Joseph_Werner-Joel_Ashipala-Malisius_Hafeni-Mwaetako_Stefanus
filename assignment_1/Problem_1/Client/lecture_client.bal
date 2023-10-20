@@ -9,9 +9,9 @@ public function addLecturer() returns error? {
     http:Request addLecturerRequest = new;
     addLecturerRequest.method = http:POST;
     addLecturerRequest.setJsonPayload({
-        "staffNumber": "123456",
-        "name": "John Doe",
-        "faculty": "Engineering",
+        "staffNumber": "2201345",
+        "name": "Hafeni",
+        "faculty": "Computing & Informatics",
         // Add other lecturer details here
     });
     
